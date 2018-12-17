@@ -6,16 +6,32 @@
 
 %% DEBUG
 % To make debug easier in case of problems, function to save the intermediate steps 
-% are available. Just uncomment folder path (line 11), the addpath command
-% (line 17) and use the save methods. 
-DEBUG = False;
+% are available. Just set DEBUG to true to save intermediate steps (lots of
+% images)
+DEBUG = false; % recommended = false
+% if you don't want to save all images, but the persepctive views
+% (elemental images) and the focal stack only (recommended), set to true
+SAVE_ELEMENTAL_IMAGES_AND_FOCAL_STACK = true; % recommended = true
+% if true, it saves a .txt with the parameters used (useful if you come
+% back later and you want to know how results were created)
+SAVE_PARAMETERS = true; % recommended = true
+% if you need to save the matting mask set to true;
+SAVE_MATTE = true; % recommended = true;
 
-folder_path = '/data1/palmieri/SECONDMENTS/VALENCIA_SECONDMENT/Results/Zebrafish_EI/';
-[status,msg] = mkdir(folder_path)
+%% RESULTS FOLDER
+% FOLDER WHERE STUFF WILL BE SAVED!!!
+% if it does not exists, the program will create a folder and save there
+folder_path = strcat(pwd, filesep, 'RESULTS', filesep);
+[status,msg] = mkdir(folder_path);
 if status == 0
     fprintf(msg);
     pause;
 end
+
+%% INPUT PATH
+% path of the image taken as input
+path = strcat(pwd, filesep, 'IMAGES', filesep, 'Fibers', filesep, '3.bmp');
+
 
 setupPaths();
 compileCPPFiles();
@@ -32,7 +48,7 @@ compileCPPFiles();
 % TYPE 9 - Flower (with matting!) - Experimental
 % TYPE 10 - Synthetic
 % TYPE 11 - Zebrafish
-img_type = 11;
+img_type = 1;
 
 % default parameters per image type
 [pitch, C0, a, ini, fin, offset, step_pix] = defaultParameters(img_type);
@@ -60,7 +76,8 @@ use_fail_pred = true; % use failure prediction in the multi-scale combination = 
 which_conf = 2;
 which_depth = 0;
 merging_strategy = 4;
-path = '/data1/palmieri/SECONDMENTS/VALENCIA_SECONDMENT/Images/Zebrafish/4_x7.png'; %'/data1/palmieri/Synthetic_with_xml/Fibers9.png';
+
+
 % for cost volume
 % DEFOCUS
 gamma_DFD_s1 = 0.66; % regulates the contribution of downscaled image s1 - half size
@@ -81,7 +98,7 @@ phi = -1;   % phi between 0 and 1 combine DEFOCUS cue and CORRESPONDE cue
             % from program using the confidence of the two depths
 
 % DEBUG
-if DEBUG
+if DEBUG || SAVE_PARAMETERS
     save_parameters(folder_path, img_type, pitch, ini, fin, a, C0, offset, step_pix, path, superpixels_size, ...
         window_size, alpha_DFD, alpha_DFC, matting, gamma_DFD_s1, gamma_DFD_s2, beta_DFD, gamma_DFC_s1, ...
         gamma_DFC_s2, beta_DFC, phi, superpixel_type, window_size_PP);
@@ -92,7 +109,7 @@ end
 refocused_central_img = EIs(:,:,:,ceil(size(EIs,4)/2));
 
 % DEBUG
-if DEBUG
+if DEBUG || SAVE_ELEMENTAL_IMAGES_AND_FOCAL_STACK
     save_image(folder_path, fs, map, EIs);
 end
 
@@ -100,7 +117,7 @@ end
 [trimap, matte] = compute_trimap_and_matte(refocused_central_img, img_type, pitch, matting);
 
 % DEBUG
-if DEBUG
+if DEBUG || SAVE_MATTE
     save_trimap(folder_path, trimap);
     save_matte(folder_path, matte);
 end
@@ -112,6 +129,7 @@ superpixels = calc_superpix(refocused_central_img, matte, superpixels_size, supe
 if DEBUG
     save_superpixels(folder_path, superpixels, refocused_central_img);
 end
+
 %% 4b) calculate priors for the multi-scale
 priorsmap = calculate_priors(refocused_central_img, matte, map_type);
 

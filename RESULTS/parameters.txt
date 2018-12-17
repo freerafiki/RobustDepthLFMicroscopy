@@ -1,0 +1,15 @@
+PARAMETERS
+
+Imgtype=1 fibers
+pitch=683, ini=670, fin=693, a=[2 3 2], C0=[478, 831]
+offset= 70.0, step_pix=13.5
+Superpixel technique=slicmex from EPFL, number of sp = 500, compactness = 20
+window_size=7, merging_parameter=-1.000, matting=1, window_size_post-proc=3
+
+DEFOCUS
+alphaDFD=0.900, gammaDFD_s1=0.660, gammaDFD_s2=0.330, betaDFD=0.100
+
+CORRESPONDENCES
+alphaDFC=0.700, gammaDFC_s1=0.660, gammaDFC_s2=0.330, betaDFC=0.100
+
+Calculated on image at /data1/palmieri/GITHUBS/RobustDepthLFMicroscopy/IMAGES/Fibers/3.bmp

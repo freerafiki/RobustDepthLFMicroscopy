@@ -6,9 +6,15 @@
 
 %% DEBUG
 % To make debug easier in case of problems, function to save the intermediate steps 
-% are available. Just uncomment folder path (line 11), the addpath command
-% (line 17) and use the save methods. 
+% are available. Just set DEBUG to True to save intermediate steps (lots of
+% images)
 DEBUG = False;
+% if you don't want to save all images, but the persepctive views
+% (elemental images) and the focal stack only (recommended), set to true
+SAVE_ELEMENTAL_IMAGES_AND_FOCAL_STACK = True;
+% if true, it saves a .txt with the parameters used (useful if you come
+% back later and you want to know how results were created)
+SAVE_PARAMETERS = True; % recommended = True
 
 folder_path = '/data1/palmieri/SECONDMENTS/VALENCIA_SECONDMENT/Results/Zebrafish_EI/';
 [status,msg] = mkdir(folder_path)
@@ -133,28 +139,28 @@ end
 %% 6) calculate cost volume from correspondences
 
 [cvc, depth_C, conf_C] = hex_stereo_matching_v2(EIs, refocused_central_img, window_size, alpha_DFC, dmin, dmax, matte, gamma_DFC_s1, gamma_DFC_s2, priorsmap, use_fail_pred);
-%dfC_cv = depth_from_correspondences_msc(EIs, refocused_central_img, window_size, alpha_DFC, dmin, dmax, matte, gamma_DFD_s1, gamma_DFD_s2, priorsmap, use_fail_pred);
-
-% 6b) smooth the cost volume
-%dfC_cv_smoothed = superpixels_contribution(dfC_cv, superpixels, refocused_central_img, matte);
-%DFC = dfC_cv + beta_DFC.*dfC_cv_smoothed;
 
 cvc_sp = superpixels_contribution(cvc, superpixels, refocused_central_img, matte, sigma_sp);
 cvc_tot = cvc + beta_DFC.*cvc_sp;
 
-% DEBUG8
-%save_depth_CV(folder_path, DFC, 'depth_from_correspondences', matte);
-%save_depth_CV(folder_path, dfC_cv, 'depth_from_correspondences_no_SP', matte);
-save_depth_CV(folder_path, cvc_tot, 'depth_from_correspondences_hexfp', matte);
-save_depth_CV(folder_path, cvc, 'depth_from_correspondences_no_SP_hexfp', matte);
+depth_C_inv = dmax - depth_C;
 
 % DEBUG
-depth_C_inv = dmax - depth_C;
-save_final_depth(folder_path, depth_D, 'depth_DEFOCUS');
-save_final_depth(folder_path, depth_C, 'depth_CORRESPONDENCE');
-%save_final_depth(folder_path, depth_C_inv, 'depth_CORRESPONDENCE_INV');
-save_final_depth(folder_path, conf_D, 'confidence_DEFOCUS');
-save_final_depth(folder_path, conf_C, 'confidence_CORRESPONDENCE');
+if DEBUG
+    %save_depth_CV(folder_path, DFC, 'depth_from_correspondences', matte);
+    %save_depth_CV(folder_path, dfC_cv, 'depth_from_correspondences_no_SP', matte);
+    save_depth_CV(folder_path, cvc_tot, 'depth_from_correspondences_hexfp', matte);
+    save_depth_CV(folder_path, cvc, 'depth_from_correspondences_no_SP_hexfp', matte);
+end
+
+% DEBUG
+if DEBUG
+    save_final_depth(folder_path, depth_D, 'depth_DEFOCUS');
+    save_final_depth(folder_path, depth_C, 'depth_CORRESPONDENCE');
+    %save_final_depth(folder_path, depth_C_inv, 'depth_CORRESPONDENCE_INV');
+    save_final_depth(folder_path, conf_D, 'confidence_DEFOCUS');
+    save_final_depth(folder_path, conf_C, 'confidence_CORRESPONDENCE');
+end
 
 %% 7) merge the two volumes?
 CVC = invert_volume(cvc_tot);
@@ -168,9 +174,11 @@ final_depth_MGM = extract_depth(merged_vol, matte, refocused_central_img, 'mgm')
 test_wta = extract_depth(merged_vol, matte, refocused_central_img, 'wta');
 
 % DEBUG
-save_final_depth(folder_path, final_depth_MRF, 'depth_combined_MRF');
-save_final_depth(folder_path, single(final_depth_GC), 'depth_combined_GC');
-save_final_depth(folder_path, final_depth_MGM, 'depth_combined_MGM');
+if DEBUG
+    save_final_depth(folder_path, final_depth_MRF, 'depth_combined_MRF');
+    save_final_depth(folder_path, single(final_depth_GC), 'depth_combined_GC');
+    save_final_depth(folder_path, final_depth_MGM, 'depth_combined_MGM');
+end
 
 %% 8) final post processing
 final_depth_WMF = WMT(double(final_depth_GC), refocused_central_img);
@@ -178,14 +186,17 @@ final_depth_WMF_GF = guidedfilter_color(double(uint8(refocused_central_img)), do
 final_depth_WMF_BF = jointBF(double(final_depth_WMF), ((refocused_central_img)), window_size_PP);
 
 % DEBUG
-save_final_depth(folder_path, final_depth_WMF_BF, 'final_depth_post_proc_BF');
-save_img_and_depth_jpg(folder_path, final_depth_WMF_BF, refocused_central_img, 'imgBF');
-save_final_depth(folder_path, final_depth_WMF, 'final_depth_post_proc');
-save_final_depth(folder_path, final_depth_WMF_GF, 'final_depth_post_proc_GF');
-save_img_and_depth_jpg(folder_path, final_depth_WMF, refocused_central_img, 'imgWMT');
+if DEBUG
+    save_final_depth(folder_path, final_depth_WMF_BF, 'final_depth_post_proc_BF');
+    save_img_and_depth_jpg(folder_path, final_depth_WMF_BF, refocused_central_img, 'imgBF');
+    save_final_depth(folder_path, final_depth_WMF, 'final_depth_post_proc');
+    save_final_depth(folder_path, final_depth_WMF_GF, 'final_depth_post_proc_GF');
+    save_img_and_depth_jpg(folder_path, final_depth_WMF, refocused_central_img, 'imgWMT');
+    save_img_and_depth_jpg(folder_path, final_depth_WMF_GF, refocused_central_img, 'imgWMTGF');
+    wta_wmf = WMT(double(test_wta), refocused_central_img);
+    wta_wmf_bf = jointBF(double(wta_wmf), refocused_central_img, window_size_PP);
+    save_img_and_depth_jpg(folder_path, wta_wmf_bf, refocused_central_img, 'imgwta');
+end
+
+% SAVE FINAL IMAGE ANYWAY
 save_img_and_depth_jpg(folder_path, final_depth_WMF_GF, refocused_central_img, 'imgWMTGF');
-
-
-wta_wmf = WMT(double(test_wta), refocused_central_img);
-wta_wmf_bf = jointBF(double(wta_wmf), refocused_central_img, window_size_PP);
-save_img_and_depth_jpg(folder_path, wta_wmf_bf, refocused_central_img, 'imgwta');
