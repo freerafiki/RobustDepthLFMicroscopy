@@ -16,5 +16,4 @@ addpath(genpath('SFF2016'));
 addpath(genpath('vlfeat-0.9.20'));
 addpath(genpath('GROUNDTRUTH'));
 addpath(genpath('SAVE'));
-%addpath(genpath('MISCELLANEOUS'));
 %addpath(genpath('VISUALIZATION'));
