@@ -8,7 +8,7 @@ It combines vision cues (correspondence, defocus) to estimate accurate and robus
 
 ### Microscope Imagery
 The FiMic microscope allows to capture light field in a single shot.
-For further information regarding FiMic Light Field Microscope, refer to the paper [FIMic: design for ultimate 3D-integral microscopy of in-vivo biological samples](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5772586/)
+For further information regarding FiMic Fourier Integral Microscope, refer to the paper [FIMic: design for ultimate 3D-integral microscopy of in-vivo biological samples](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5772586/)
 
 ### Implementation
 About implementation, the code is all in Matlab and it makes use of MEX files. It uses other toolboxes, but they are already present in the github folders.
