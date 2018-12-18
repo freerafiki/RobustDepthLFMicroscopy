@@ -13,6 +13,7 @@ For further information regarding FiMic Fourier Integral Microscope, refer to th
 ### Implementation
 About implementation, the code is all in Matlab and it makes use of MEX files. It uses other toolboxes, but they are already present in the github folders.
 
+#### Dependencies
 The dependencies are a C++ compiler for the MEX code (if you are using gcc, supported version is 4.7; however until 6.x is working and Matlab just gives a warning, from 7.0 it may cause some problems. If on Linux systems, use of alternatives can help about this [read more here](https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version))
 
 For further information, please contact me at: lpa@informatik.uni-kiel.de
