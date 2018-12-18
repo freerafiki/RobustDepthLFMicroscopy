@@ -6,8 +6,8 @@ if type == 1
     pt=floor(pitch/2);
     C0=[478, 831]; %2 %%   [472, 848]; %3 %%    %;%[295, 536];%telescope[344, 496];
     a=[2 3 2];
-    ini = 670;
-    fin = 693;
+    ini = 666;
+    fin = 697;
     offset=70; %%%focus offset of the optical system
     step_pix=13.5; %14.5; % step_pix=27.5/scale; % 5-4-5-4 structure is 27.5 micrometer/pixel
 % BICHO

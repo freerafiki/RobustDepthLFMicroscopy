@@ -50,15 +50,22 @@ compileCPPFiles();
 % TYPE 11 - Zebrafish
 img_type = 1;
 
-% default parameters per image type
+%% PARAMETERS
+% The method sets default parameters per image type
+% the depth range can change per diffeent image, so the two values
+% ini and fin (initial and final position on the z-axis) can be 
+% changed manually here or also inside the defaultParameters function
+% if you see that some areas are not correctly estimated, it could be
+% due to the fact that you didn't select an appropriate range 
+% typical ranges have around 30 focal planes
 [pitch, C0, a, ini, fin, offset, step_pix] = defaultParameters(img_type);
 % change manually if needed
 %pitch = 401 ;
 % C0 = %;
 % ... %;
 %C0 = [344, 496];
-%ini = 450;% --456;telescopebox --  %687;
-%fin = 460;% --466;telescopebox -- %705;
+%ini = 450;% 
+%fin = 460;% 
 % for the depth estimation
 window_size = 7; % window around the point
 window_size_PP = 3; % high window size for post processing will smooth too much
