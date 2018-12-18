@@ -1,5 +1,3 @@
-# Coming Soon
-
 # Robust Depth Estimation for Light Field Microscopy
 
 This is a Matlab implementation of the procedure described in the Robust Depth Estimation for Light Field Microscopy paper. (it is submitted and yet to be accepted)
