@@ -87,12 +87,14 @@ merging_strategy = 4;
 
 % for cost volume
 % DEFOCUS
-gamma_DFD_s1 = 0.66; % regulates the contribution of downscaled image s1 - half size
-gamma_DFD_s2 = 0.33; % regulates the contribution of downscaled image s2 - a quarter
+gamma_DFD_s1 = 0.6; % gamma_1 in the paper (eq. 11)
+gamma_DFD_s2 = 0.2; % gamma_2 in the paper (eq. 11)
+gamma_DFD_s2 = 0.1; % gamma_3 in the paper (eq. 11)
 beta_DFD = 0.1;    % regulates the contribution of superpixels
 % CORRESPONDENCES
-gamma_DFC_s1 = 0.66; % regulates the contribution of downscaled image s1 - half size
-gamma_DFC_s2 = 0.33; % regulates the contribution of downscaled image s2 - a quarter
+gamma_DFC_s1 = 0.6; % gamma_1 in the paper (eq. 11)
+gamma_DFC_s2 = 0.2; % gamma_2 in the paper (eq. 11)
+gamma_DFC_s3 = 0.1; % gamma_3 in the paper (eq. 11)
 beta_DFC = 0.1;    % regulates the contribution of superpixels
 dmin = ini-pitch;
 dmax = fin-pitch;
@@ -141,7 +143,7 @@ end
 priorsmap = calculate_priors(refocused_central_img, matte, map_type);
 
 %% 5) calculate cost volume from defocus
-dfD_cv = defocus_norm_cv(fs, refocused_central_img, window_size, alpha_DFD, gamma_DFD_s1, gamma_DFD_s2, priorsmap);
+dfD_cv = defocus_norm_cv(fs, refocused_central_img, window_size, alpha_DFD, gamma_DFD_s1, gamma_DFD_s2, gamma_DFD_s3, priorsmap);
 
 % 5b) smooth the cost volume
 dfD_cv_smoothed = superpixels_contribution(dfD_cv, superpixels, refocused_central_img, matte, sigma_sp);

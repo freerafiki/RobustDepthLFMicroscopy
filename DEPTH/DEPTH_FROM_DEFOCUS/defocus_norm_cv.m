@@ -1,4 +1,4 @@
-function [cv, cv_sp1, cv_sp2] = defocus_norm_cv(fs, aif, ws, alpha, gamma_s1, gamma_s2, priors)
+function [cv, cv_sp1, cv_sp2] = defocus_norm_cv(fs, aif, ws, alpha, gamma1, gamma2, gamma3, priors)
 
     fprintf('\nComputing cost volume1 from defocus!\n')
     % compute depth from defocus by calculating difference between focal stack
@@ -83,9 +83,9 @@ function [cv, cv_sp1, cv_sp2] = defocus_norm_cv(fs, aif, ws, alpha, gamma_s1, ga
             nccsadaw_s2 = nccsadaw_s2_tmp;
         end
         
-        cur_image = high_freqs .* (nccsadaw .* 0.6 + nccsadaw_s1 .* 0.3 + nccsadaw_s2 .* 0.1) + ...
-            med_freqs .* (nccsadaw .* 0.2 + nccsadaw_s1 .* 0.6 + nccsadaw_s2 .* 0.2) + ...
-            low_freqs .* (nccsadaw .* 0.1 + nccsadaw_s1 .* 0.3 + nccsadaw_s2 .* 0.6);
+        cur_image = high_freqs .* (nccsadaw .* gamma1 + nccsadaw_s1 .* gamma2 + nccsadaw_s2 .* gamma3) + ...
+            med_freqs .* (nccsadaw .* gamma3 + nccsadaw_s1 .* gamma1 + nccsadaw_s2 .* gamma2) + ...
+            low_freqs .* (nccsadaw .* gamma3 + nccsadaw_s1 .* gamma2 + nccsadaw_s2 .* gamma1);
       	
         %cur_image2 = (nccsadaw + gamma_s1.*nccsadaw_s1 + gamma_s2.*nccsadaw_s2) / (1 + gamma_s1 + gamma_s2);
         cv(:,:,i) = min(1, max(0, guidedfilter_color_runfilter(cur_image)));
