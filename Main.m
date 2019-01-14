@@ -89,7 +89,7 @@ merging_strategy = 4;
 % DEFOCUS
 gamma_DFD_s1 = 0.6; % gamma_1 in the paper (eq. 11)
 gamma_DFD_s2 = 0.2; % gamma_2 in the paper (eq. 11)
-gamma_DFD_s2 = 0.1; % gamma_3 in the paper (eq. 11)
+gamma_DFD_s3 = 0.1; % gamma_3 in the paper (eq. 11)
 beta_DFD = 0.1;    % regulates the contribution of superpixels
 % CORRESPONDENCES
 gamma_DFC_s1 = 0.6; % gamma_1 in the paper (eq. 11)
