@@ -159,7 +159,7 @@ end
 
 %% 6) calculate cost volume from correspondences
 
-[cvc, depth_C, conf_C] = hex_stereo_matching_v2(EIs, refocused_central_img, window_size, alpha_DFC, dmin, dmax, matte, gamma_DFC_s1, gamma_DFC_s2, priorsmap, use_fail_pred);
+[cvc, depth_C, conf_C] = hex_stereo_matching_v2(EIs, refocused_central_img, window_size, alpha_DFC, dmin, dmax, matte, gamma_DFC_s1, gamma_DFC_s2, gamma_DFD_s3, priorsmap, use_fail_pred);
 
 cvc_sp = superpixels_contribution(cvc, superpixels, refocused_central_img, matte, sigma_sp);
 cvc_tot = cvc + beta_DFC.*cvc_sp;
