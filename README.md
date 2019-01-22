@@ -22,10 +22,14 @@ The dependencies are a C++ compiler for the MEX code (if you are using gcc, supp
 It takes inspiration and parts of code from other approaches, who have been cited in the paper and we would like to thank for sharing their code.
 
 [1] JEON2015: [Open Source Code](https://drive.google.com/file/d/0B2553ggh3QTcS01zU0RjOG5FTjQ/view)
-[Accurate Depth Map Estimation from a Lenslet Light Field Camera, Jeon et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Jeon_Accurate_Depth_Map_2015_CVPR_paper.pdf)
+ -- [Accurate Depth Map Estimation from a Lenslet Light Field Camera, Jeon et al., 2015](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Jeon_Accurate_Depth_Map_2015_CVPR_paper.pdf)
 
-[2] MGM2015: [Project page](http://www.bmva.org/bmvc/2015/papers/paper090/index.html) [Open Source Code](http://www.bmva.org/bmvc/2015/papers/paper090/index.html)
-[MGM: A Significantly More Global Matching for Stereovision, Facciolo et al.](http://www.bmva.org/bmvc/2015/papers/paper090/paper090.pdf
+[2] MGM2015: [Project page](http://www.bmva.org/bmvc/2015/papers/paper090/index.html) -- [Open Source Code](http://www.bmva.org/bmvc/2015/papers/paper090/index.html) -- 
+[MGM: A Significantly More Global Matching for Stereovision, Facciolo et al., 2015](http://www.bmva.org/bmvc/2015/papers/paper090/paper090.pdf)
+
+[3] SFF2016: [Open Source Code](https://sites.google.com/view/cvia/downloads) -- [Analysis of focus measure operators for shape-from-focus, Pertuz et al., 2013](https://www.sciencedirect.com/science/article/pii/S0031320312004736?via%3Dihub)
+
+[4] TAO2013: [Project Page with Open Source Code](http://graphics.berkeley.edu/papers/Tao-DFC-2013-12/) -- [Depth from Combining Defocus and Correspondence Using Light-Field Cameras, Tao et al., 2013](http://graphics.berkeley.edu/papers/Tao-DFC-2013-12/Tao-DFC-2013-12.pdf)
 
 
 For further information, please contact me at: lpa@informatik.uni-kiel.de
