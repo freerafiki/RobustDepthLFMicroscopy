@@ -1,6 +1,8 @@
 # Robust Depth Estimation for Light Field Microscopy
 
-This is a Matlab implementation of the procedure described in the Robust Depth Estimation for Light Field Microscopy paper. (it is submitted and yet to be accepted)
+This is a Matlab implementation of the procedure described in the paper:
+Robust Depth Estimation for Light Field Microscopy. 
+Paper has been accepted and will be soon updated.
 
 It combines vision cues (correspondence, defocus) to estimate accurate and robust depth maps from light field microscopy images. Images are acquired with FiMic microscope or created with Blender.
 
