@@ -16,7 +16,7 @@ About implementation, the code is mainly in Matlab and it makes use of some MEX 
 #### Dependencies
 The dependencies are a C++ compiler for the MEX code (if you are using gcc, supported version is 4.7; however until 6.x is working and Matlab just gives a warning, from 7.0 it may cause some problems. If on Linux systems, use of alternatives can help about this [read more here](https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version))
 
-#### References
+#### Main References
 It takes inspiration and parts of code from other approaches, who have been cited in the paper and we would like to thank for sharing their code.
 
 [1] JEON2015: [Open Source Code](https://drive.google.com/file/d/0B2553ggh3QTcS01zU0RjOG5FTjQ/view)
