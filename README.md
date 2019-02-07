@@ -4,10 +4,27 @@ This is a Matlab implementation of the procedure described in the paper:
 
 [*Robust Depth Estimation for Light Field Microscopy*, L. Palmieri, G. Scrofani, N. Incardona, G. Saavedra, M. Martínez-Corral and R. Koch, Sensors 2019, 19, 500.](https://www.mdpi.com/1424-8220/19/3/500)
 
-It combines vision cues (correspondence, defocus) to estimate accurate and robust depth maps from light field microscopy images. Images are acquired with FiMic microscope or created with Blender.
+
+
+### Algorithm
+
+![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/BlockDiagramv2.png)
+
+Starting from a FiMic image, it creates a focal stack and separates the perspective views. Then two cost volumes are built, and refined using multi-scale and superpixels contributions.
+Finally, using energy minimization the two volumes are combined and the final depth map is extracted.
+
+#### Results
+Cotton fibers           | Cotton fibers         | Zebrafish             | Chip                  | Solderings            |
+|:---------------------:|:---------------------:|:---------------------:|:---------------------:|:---------------------:|
+| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/1_-_img.png)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/2_-_img.png)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/zebrafish.jpg)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/chip.png)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/EI_4.png)|
+|![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/1_-_depth.png)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/2_-_depth.png)|![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/prop4simatting.png)|![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/imgGF_col_depth.png)|![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/soldingLUCA.png)|
+
 
 ### Microscope Imagery
 The FiMic microscope allows to capture light field in a single shot.
+
+![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/fimic.jpg)
+
 For further information regarding FiMic Fourier Integral Microscope, refer to the paper [FIMic: design for ultimate 3D-integral microscopy of in-vivo biological samples](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5772586/)
 
 ### Implementation
