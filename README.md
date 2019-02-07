@@ -13,7 +13,7 @@ This is a Matlab implementation of the procedure described in the paper:
 Starting from a FiMic image, it creates a focal stack and separates the perspective views. Then two cost volumes are built, and refined using multi-scale and superpixels contributions.
 Finally, using energy minimization the two volumes are combined and the final depth map is extracted.
 
-#### Results
+#### Some Results
 Cotton fibers           | Cotton fibers         | Zebrafish             | Chip                  | Solderings            |
 |:---------------------:|:---------------------:|:---------------------:|:---------------------:|:---------------------:|
 | ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/1_-_img.png)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/2_-_img.png)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/zebrafish.jpg)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/chip.png)| ![](https://github.com/PlenopticToolbox/RobustDepthLFMicroscopy/blob/master/readmeimages/EI_4.png)|
